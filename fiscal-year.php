@@ -27,22 +27,22 @@ $fiscalYear=array(
        
     );
 /* Testing with static date*/
-$created='2017-07-17';
+$created='2017-08-15';
 //Placing year month and day in array
 $exploding=explode("-",$created);
 	if($exploding[1]>7) // if month is more than June
 	{ 
 		$newExpYear=$exploding[0]+1; // 2017+1
 	}
-	 elseif($exploding[1]>=7 && $exploding[2]<16)//if month>=7 AND days less than 16
+	 elseif($exploding[1]>=7 && $exploding[2]<$fiscalYear[$exploding[0]])//if month>=7 AND days less than corresponding day
 	 {
 		$newExpYear=$exploding[0]; //2017 =>same year
     }
-    elseif($exploding[1]>=7 && $exploding[2]>16) //if month >=7 AND day greater than 16
+    elseif($exploding[1]>=7 && $exploding[2]>$fiscalYear[$exploding[0]]) //if month >=7 AND day greater than corresponding day
     {
     	$newExpYear=$exploding[0]+1; //2018
     }
-    elseif($exploding[1]>=7 && $exploding[2]>=16) //if month >=7 AND days >=16
+    elseif($exploding[1]>=7 && $exploding[2]>=$fiscalYear[$exploding[0]]) //if month >=7 AND days >=corresponding day
     {
     	$newExpYear=$exploding[0]; //constant year
     }
