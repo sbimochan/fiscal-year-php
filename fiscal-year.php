@@ -27,31 +27,35 @@ $fiscalYear=array(
        
     );
 /* Testing with static date*/
-$created='2017-08-15';
+$created='2017-09-30';
 //Placing year month and day in array
 $exploding=explode("-",$created);
-	if($exploding[1]>7) // if month is more than June
-	{ 
-		$newExpYear=$exploding[0]+1; // 2017+1
-	}
-	 elseif($exploding[1]>=7 && $exploding[2]<$fiscalYear[$exploding[0]])//if month>=7 AND days less than corresponding day
-	 {
-		$newExpYear=$exploding[0]; //2017 =>same year
-    }
-    elseif($exploding[1]>=7 && $exploding[2]>$fiscalYear[$exploding[0]]) //if month >=7 AND day greater than corresponding day
-    {
-    	$newExpYear=$exploding[0]+1; //2018
-    }
-    elseif($exploding[1]>=7 && $exploding[2]>=$fiscalYear[$exploding[0]]) //if month >=7 AND days >=corresponding day
-    {
-    	$newExpYear=$exploding[0]; //constant year
-    }
-    else
-    {
-    	$newExpYear=$exploding[0]; //else also same year
+switch (true) {
+    case $exploding[1]>7:
+
+    $newExpYear=$exploding[0]+1;
+        break;
+     
+     case $exploding[1]>=7 && $exploding[2]<$fiscalYear[$exploding[0]]://if month>=7 AND days less than corresponding day
+     
+        $newExpYear=$exploding[0]; //2017 =>same year
+    break;
+
+    case $exploding[1]>=7 && $exploding[2]>$fiscalYear[$exploding[0]]: //if month >=7 AND day greater than corresponding day
+    
+        $newExpYear=$exploding[0]+1; //2018
+        break;
+    
+    case $exploding[1]>=7 && $exploding[2]>=$fiscalYear[$exploding[0]]://if month >=7 AND days >=corresponding day
+    
+        $newExpYear=$exploding[0]; //constant year
+    break;
+    default:
+            $newExpYear=$exploding[0]; //else also same year
+    break;
     }
     // var_dump($fiscalYear[2030]);
-    $dynamicDay=$fiscalYear[$newExpYear];
+$dynamicDay=$fiscalYear[$newExpYear];
 echo $expiry= $newExpYear.'-'.'7'.'-'. $dynamicDay; 
 
 ?>
